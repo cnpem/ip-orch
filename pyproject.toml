@@ -1,34 +1,58 @@
 [build-system]
-requires = ["setuptools>=61.0"]
+requires = ["setuptools>=77.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "ip-orch"
-version = "0.0.1"
+version = "1.0.0"
 authors = [
   { name="Mauri Pereira dos Santos Júnior", email="mauri.junior@lnls.br" },
   { name="Pedro Henrique Machado Zanineli", email="pedro.zanineli@lnnano.cnpem.br" },
   { name="Bruno Focassio", email="bruno.focassio@lnnano.cnpem.br" },
 ]
-description = "Uma biblioteca para MLIPs e benchmarks."
+description = "Lightweight orchestration for machine-learning interatomic potentials."
 readme = "README.md"
 requires-python = ">=3.9"
-license = { text="MIT" }
+license = "MIT"
+license-files = ["LICENSE"]
+keywords = [
+    "ase",
+    "atomistic-simulation",
+    "interatomic-potentials",
+    "machine-learning-potentials",
+    "materials-science",
+    "mlip",
+]
 classifiers = [
-    "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: MIT License",
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
     "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Chemistry",
+    "Topic :: Scientific/Engineering :: Physics",
 ]
 
 dependencies = [
     "ase",
-    "rich",  
-    "numpy",  
+    "rich",
+    "numpy",
     "pandas",
 ]
 
+[project.urls]
+Homepage = "https://github.com/pedrozanineli/ip-orch"
+Repository = "https://github.com/pedrozanineli/ip-orch"
+Issues = "https://github.com/pedrozanineli/ip-orch/issues"
+Documentation = "https://github.com/pedrozanineli/ip-orch#readme"
+
 [tool.setuptools.packages.find]
 where = ["."]
+include = ["ip_orch*"]
 
 [tool.setuptools.package-data]
 ip_orch = ["scripts/*.csv"]
