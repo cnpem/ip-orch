@@ -25,7 +25,6 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# Orb requires Python >= 3.12.
 RUN python -c "import sys; assert sys.version_info >= (3, 12), sys.version"
 
 COPY . ./ip-orch
@@ -45,14 +44,14 @@ RUN python -m pip install --upgrade pip setuptools wheel && \
 
 # Install each MLIP in its own Python environment. ip-orch dispatches workers
 # through /opt/iporch-envs/<env>/bin/python.
-RUN python -m virtualenv "$IPORCH_ENVS_DIR/mace" && \
+RUN python -m virtualenv --system-site-packages "$IPORCH_ENVS_DIR/mace" && \
     "$IPORCH_ENVS_DIR/mace/bin/python" -m pip install --upgrade pip setuptools wheel && \
     "$IPORCH_ENVS_DIR/mace/bin/python" -m pip install ./ip-orch ./mace && \
     if [ "$INSTALL_MACE_CUEQ" = "true" ]; then \
         "$IPORCH_ENVS_DIR/mace/bin/python" -m pip install "./mace[cueq-cuda-12]"; \
     fi
 
-RUN python -m virtualenv "$IPORCH_ENVS_DIR/orb" && \
+RUN python -m virtualenv --system-site-packages "$IPORCH_ENVS_DIR/orb" && \
     "$IPORCH_ENVS_DIR/orb/bin/python" -m pip install --upgrade pip setuptools wheel && \
     "$IPORCH_ENVS_DIR/orb/bin/python" -m pip install ./ip-orch ./orb-models && \
     if [ "$INSTALL_CUML" = "true" ]; then \
