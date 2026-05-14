@@ -14,7 +14,7 @@ authors:
     affiliation: "1, 2"
 
   - name: Mauri P. dos S. Junior
-    orcid: 
+    orcid: 0009-0004-8919-3079
     equal-contrib: true
     affiliation: "1"
   
