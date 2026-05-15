@@ -52,7 +52,7 @@ Documentation = "https://github.com/pedrozanineli/ip-orch#readme"
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["ip_orch*"]
+include = ["ip_orch*", "examples*"]
 
 [tool.setuptools.package-data]
 ip_orch = ["scripts/*.csv"]
