@@ -40,7 +40,7 @@
 
 ## Project
 
-With the rapid growth of Machine Learning Interatomic Potentials (MLIPs) with different architectures and software ecosystems, a fragmented ladscape has been created, where models are often tied to incompatible dependencies and heterogeneous interfaces. In this scenario, the Laboratory of Simulation and Artificial Intelligence(LSIA) that is part of the Brazilian Nanotechnology National Laboratory ,IP-Orch is a lightweight Python package for orchestrating multiple MLIPs, allowing reproducible benchmarking and systematic comparison across models using an unified ASE-based workflow.
+With the rapid growth of Machine Learning Interatomic Potentials (MLIPs) with different architectures and software ecosystems, a fragmented landscape has been created, where models are often tied to incompatible dependencies and heterogeneous interfaces. In this scenario, the Laboratory of Simulation and Artificial Intelligence(LSIA) that is part of the Brazilian Nanotechnology National Laboratory developed the IP-Orch, which works as a lightweight Python package for orchestrating multiple MLIPs, allowing reproducible benchmarking and systematic comparison across models using an unified ASE-based workflow.
 
 <p align="center">
   <img alt="IP-Orch Logo" src="paper/iporch-architecture.svg" width="750">
