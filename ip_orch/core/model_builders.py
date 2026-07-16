@@ -90,7 +90,7 @@ def build_sevennet_omni(ctx: ModelBuildContext) -> Any:
     from sevenn.calculator import SevenNetD3Calculator
 
     # return SevenNetCalculator(model="7net-omni", device=ctx.device, modal="mpa")
-    return SevenNetD3Calculator(model='7net-omni',device='ctx.device',functional_name='pbe',damping_type='damp_bj')
+    return SevenNetD3Calculator(model='7net-omni', modal="mpa", device=ctx.device,functional_name='pbe',damping_type='damp_bj')
 
 @model_builder("nequip_oam_l")
 def build_nequip_oam_l(ctx: ModelBuildContext) -> Any:
