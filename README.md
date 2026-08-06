@@ -34,6 +34,7 @@
     - [Saving model results](#saving-model-results)
     - [Reference energy correction](#reference-energy-correction)
 - [Contributions and suggestions](#contributions-and-suggestions)
+- [Reference](#reference)
 - [License](#license)
 
 <!-- - [Contributing](#contributing) -->
@@ -280,7 +281,21 @@ IPORCH_RESULTS_CSV=results/bilayer.csv ip-orch --run examples/bilayer.py --model
 
 ## Reference
 
-A paper is under development.
+```
+@software{zanineli_2026,
+  author       = {Zanineli, Pedro and
+                  Santos, Mauri and
+                  Focassio, Bruno and
+                  Schleder, Gabriel},
+  title        = {IP-Orch - Interatomic Potentials Orchestrator},
+  month        = jul,
+  year         = 2026,
+  publisher    = {Zenodo},
+  version      = {1.0.0},
+  doi          = {10.5281/zenodo.21357945},
+  url          = {https://doi.org/10.5281/zenodo.21357945},
+}
+```
 
 ## Contributions and suggestions
 
