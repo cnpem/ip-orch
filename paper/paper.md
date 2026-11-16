@@ -84,7 +84,7 @@ This is implemented through a lightweight and modular architecture, as shown in 
 
 ## Reference energy correction
 
-IP-Orch can apply optional post-processing corrections to the energy returned by a MLIP. Let $E_{\mathrm{mlip}}$ be the model energy for a structure with $N$ atoms and composition $\{n_\alpha\}$, where $n_\alpha$ is the number of atoms of element $\alpha$.
+IP-Orch can transform the potential energy returned by a MLIP, with consistent force and stress scaling. Let $E_{\mathrm{mlip}}$ be the model energy for a structure with $N$ atoms and composition $\{n_\alpha\}$, where $n_\alpha$ is the number of atoms of element $\alpha$.
 
 **Linear correction.** When coefficients $a$ and $b$ are provided, IP-Orch first applies an optional linear transformation. In total-energy mode,
 
