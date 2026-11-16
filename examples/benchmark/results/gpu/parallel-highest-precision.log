@@ -1,0 +1,62 @@
+╭──────────────────────────────────────────────────────────────────────────────╮
+│ IP-Orch: starting execution | running up to 2 models in parallel             │
+│ /tmp/iporch-mace → mace-mp-0                                                 │
+│ /tmp/iporch-orb → orb-v3                                                     │
+╰──────────────────────────────────────────────────────────────────────────────╯
+╭──────────────────────────────────────────────────────────────────────────────╮
+│ /TMP/IPORCH-MACE → mace-mp-0 | device = cuda                                 │
+│ /tmp/iporch-mace/bin/python                                                  │
+│ /home/pedro.zanineli/Projects/main/ip-orch/ip_orch/core/worker.py            │
+│ /home/pedro.zanineli/Projects/main/ip-orch/examples/benchmark/run.py         │
+│ /tmp/iporch-mace mace-mp-0  /home/pedro.zanineli/Projects/main/ip-orch       │
+╰──────────────────────────────────────────────────────────────────────────────╯
+cuequivariance or cuequivariance_torch is not available. Cuequivariance 
+acceleration will be disabled.
+Using Materials Project MACE for MACECalculator with 
+/home/pedro.zanineli/.cache/mace/MACE_MPtrj_20229model
+Using float32 for MACECalculator, which is faster but less accurate. Recommended
+for MD. Use float64 for geometry optimization.
+CUDA version: 13.2, CUDA device: 0
+Using head Default out of ['Default']
+Default dtype float32 does not match model dtype float64, converting models to 
+float32.
+{"model": "mace-mp-0", "python": "3.11.16 (main, Aug 14 2026, 15:35:36) [Clang 
+22.1.3 ]", "platform": "Linux-6.17.0-1033-oem-x86_64-with-glibc2.39", 
+"versions": {"ip-orch": "1.0.0", "ase": "3.29.0", "numpy": "2.4.6", "torch": 
+"2.15.0", "mace-torch": "0.3.14"}, "input_sha256": 
+"8dca16f60a5c40789821c806e8f7c56677075ff7b80de3490c9a6584c7c0e3b3", "energy_eV":
+-10.720877647399902, "forces_eV_per_A": [[-0.18059533834457397, 
+-2.892988959501963e-08, -5.640254130412359e-08], [0.1805953085422516, 
+3.166496753692627e-08, 5.029141902923584e-08]], "stress_eV_per_A3": 
+[-0.012418639846146107, -0.0126207135617733, -0.012620731256902218, 
+-0.004206635989248753, 1.4020402616665706e-09, -1.8291405057269117e-09], 
+"numerical_force_eV_per_A": -0.18024444580078125, "force_difference_eV_per_A": 
+0.0003508925437927246, "finite_difference_step_A": 0.001, "device": "cuda", 
+"run_id": "01af7c05-7dcf-4caa-8c0b-e5bc331c7747", "builder_precision": "backend 
+default"}
+Success: mace-mp-0
+╭──────────────────────────────────────────────────────────────────────────────╮
+│ /TMP/IPORCH-ORB → orb-v3 | device = cuda                                     │
+│ /tmp/iporch-orb/bin/python                                                   │
+│ /home/pedro.zanineli/Projects/main/ip-orch/ip_orch/core/worker.py            │
+│ /home/pedro.zanineli/Projects/main/ip-orch/examples/benchmark/run.py         │
+│ /tmp/iporch-orb orb-v3  /home/pedro.zanineli/Projects/main/ip-orch           │
+╰──────────────────────────────────────────────────────────────────────────────╯
+cache of 
+https://orbitalmaterials-public-models.s3.us-west-1.amazonaws.com/forcefields/or
+b-v3/orb-v3-conservative-inf-omat-20250404.ckpt is up-to-date
+{"model": "orb-v3", "python": "3.11.16 (main, Aug 14 2026, 15:35:36) [Clang 
+22.1.3 ]", "platform": "Linux-6.17.0-1033-oem-x86_64-with-glibc2.39", 
+"versions": {"ip-orch": "1.0.0", "ase": "3.29.0", "numpy": "2.4.6", "torch": 
+"2.15.0", "orb-models": "0.5.5"}, "input_sha256": 
+"8dca16f60a5c40789821c806e8f7c56677075ff7b80de3490c9a6584c7c0e3b3", "energy_eV":
+-10.822042465209961, "forces_eV_per_A": [[-0.39553865790367126, 
+-0.0002105258172377944, -0.0005096388049423695], [0.39553865790367126, 
+0.00021052159718237817, 0.0005096389213576913]], "stress_eV_per_A3": 
+[-0.009022815153002739, -0.009363791905343533, -0.009338142350316048, 
+-0.007445800118148327, -2.1427296815090813e-05, 2.110327477566898e-05], 
+"numerical_force_eV_per_A": -0.39768218994140625, "force_difference_eV_per_A": 
+0.0021435320377349854, "finite_difference_step_A": 0.001, "device": "cuda", 
+"run_id": "b5660a2d-a5df-4a62-b1ba-130e391d28fb", "builder_precision": 
+"float32-highest"}
+Success: orb-v3

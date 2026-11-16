@@ -12,7 +12,7 @@ not backed by archived execution logs are deliberately marked unvalidated.
 | nequip_oam_l | nequip.ase | nequip-OAM-L.nequip.pt2 | unvalidated; see benchmark logs |
 | tace_v1_oam_m | tace.foundations, tace.interface.ase | upstream loader | unvalidated; see benchmark logs |
 | grace_2l_oam | tensorpotential.calculator | upstream loader | unvalidated; see benchmark logs |
-| orb_v3 | orb_models.forcefield, orb_models.forcefield.inference.calculator, orb_models.forcefield.calculator | upstream loader | CPU validated: orb-models 0.5.5; results/orb-run.log |
+| orb_v3 | orb_models.forcefield, orb_models.forcefield.inference.calculator, orb_models.forcefield.calculator | upstream loader | CPU/CUDA validated: orb-models 0.5.5; benchmark results logs |
 | dpa_3_1_3m_ft | deepmd.calculator | dpa3-openlam.pth | unvalidated; see benchmark logs |
 | mace_mpa_0 | mace.calculators | upstream loader | unvalidated; see benchmark logs |
 | matris_10m_mp | matris.applications.base | upstream loader | unvalidated; see benchmark logs |
@@ -27,7 +27,7 @@ not backed by archived execution logs are deliberately marked unvalidated.
 | sevennet_l3i5 | sevenn.calculator | upstream loader | unvalidated; see benchmark logs |
 | hienet | hienet.hienet_calculator | HIENet-V3.pth | unvalidated; see benchmark logs |
 | grace_2l_mp | tensorpotential.calculator | upstream loader | unvalidated; see benchmark logs |
-| mace_mp_0 | mace.calculators | upstream loader | CPU validated: mace-torch 0.3.14; results/mace-run.log |
+| mace_mp_0 | mace.calculators | upstream loader | CPU/CUDA validated: mace-torch 0.3.14; benchmark results logs |
 | mace_mp | mace.calculators | upstream loader | unvalidated; see benchmark logs |
 | orb_v2 | orb_models.forcefield, orb_models.forcefield.inference.calculator, orb_models.forcefield.calculator | upstream loader | unvalidated; see benchmark logs |
 | orb_v2_mptrj | orb_models.forcefield, orb_models.forcefield.inference.calculator, orb_models.forcefield.calculator | upstream loader | unvalidated; see benchmark logs |
@@ -49,4 +49,6 @@ Test aliases, missing weights, missing dependencies and finite energy/forces.
 
 The integration suite is opt-in:
 `IPORCH_REAL_MODEL=mace-mp-0 pytest -m integration tests/integration`.
-Run separately in each backend environment. No GPU validation is implied.
+Run separately in each backend environment. Use IPORCH_DEVICE=cuda for GPU integration tests. Real two-model GPU logs are
+archived under examples/benchmark/results/gpu. ORB builders now request
+float32-highest to avoid the observed reduced-precision derivative discrepancy.

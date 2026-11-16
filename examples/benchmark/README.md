@@ -50,3 +50,24 @@ references, not DFT ground truth.
 
 ORB-v3 (orb-models 0.5.5, CPU) produced -10.82204437 eV and a
 force discrepancy of 0.002614 eV/Å on the same input.
+
+
+## CUDA validation and precision
+
+A parallel run of both models completed on RTX 3050 6 GB. See results/gpu for
+input-identical JSON, logs, driver version and memory samples. The first ORB run
+with float32-high exceeded the force-check tolerance (0.05657 eV/Å); the current
+builder uses float32-highest and achieved 0.002144 eV/Å. Retain that setting for
+force consistency checks. This is one small workload, not a memory guarantee.
+
+Validate the final recorded GPU pair explicitly:
+
+```sh
+python examples/benchmark/validate_results.py \
+  examples/benchmark/results/gpu/01af7c05-7dcf-4caa-8c0b-e5bc331c7747.json \
+  examples/benchmark/results/gpu/b5660a2d-a5df-4a62-b1ba-130e391d28fb.json
+```
+
+The validator returns nonzero for failed criteria. The earlier ORB record is
+intentionally retained as a failed precision check. IPORCH_FD_STEP can override
+the finite-difference displacement; record the actual value when comparing runs.

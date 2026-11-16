@@ -57,6 +57,7 @@ include = ["ip_orch*", "examples*"]
 
 [tool.setuptools.package-data]
 ip_orch = ["scripts/*.csv"]
+examples = ["benchmark/*.extxyz"]
 
 [project.scripts]
 ip-orch = "ip_orch.cli.main:main"

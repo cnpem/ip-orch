@@ -128,7 +128,7 @@ def build_orb_v3(ctx: ModelBuildContext) -> Any:
 
     result = pretrained.orb_v3_conservative_inf_omat(
         device=ctx.device,
-        precision="float32-high",
+        precision="float32-highest",
     )
     if isinstance(result, tuple):
         orbff, atoms_adapter = result
@@ -277,7 +277,7 @@ def build_orb_v2(ctx: ModelBuildContext) -> Any:
     except ImportError:
         from orb_models.forcefield.calculator import ORBCalculator
 
-    result = pretrained.orb_v2(device=ctx.device, precision="float32-high")
+    result = pretrained.orb_v2(device=ctx.device, precision="float32-highest")
     if isinstance(result, tuple):
         orbff, atoms_adapter = result
         return ORBCalculator(orbff, atoms_adapter=atoms_adapter, device=ctx.device)
@@ -293,7 +293,7 @@ def build_orb_v2_mptrj(ctx: ModelBuildContext) -> Any:
     except ImportError:
         from orb_models.forcefield.calculator import ORBCalculator
 
-    result = pretrained.orb_mptraj_only_v2(device=ctx.device, precision="float32-high")
+    result = pretrained.orb_mptraj_only_v2(device=ctx.device, precision="float32-highest")
     if isinstance(result, tuple):
         orbff, atoms_adapter = result
         return ORBCalculator(orbff, atoms_adapter=atoms_adapter, device=ctx.device)

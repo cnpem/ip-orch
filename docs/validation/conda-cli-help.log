@@ -1,0 +1,48 @@
+usage: ip-orch [-h]
+               (--add ENV MODEL | --remove ENV [MODEL ...] | --run SCRIPT |
+                --supported-models [SUBSTR] | --check-elements MODEL [ELEMENTS] | --configure)
+               [--models-path PATH]
+               [--envs ENV1,ENV2 | --models ALIAS1,ALIAS2]
+
+IP-ORCH: orchestrate ASE runs across multiple MLIP environments
+
+options:
+  -h, --help            show this help message and exit
+  --add ENV MODEL       Register a (environment, model) pair
+  --remove ENV [MODEL ...]
+                        Remove all models from ENV or specific ENV-MODEL pairs
+  --run SCRIPT          Run an ASE script across selected models (requires one of --envs or --models)
+  --supported-models [SUBSTR], --available-models [SUBSTR]
+                        List supported model aliases (optionally filter by name)
+  --check-elements MODEL_OR_ELEMENTS [MODEL_OR_ELEMENTS ...]
+                        Check precomputed reference-energy support for MODEL and optional comma-separated elements
+  --configure           Interactive environment discovery and setup
+  --models-path PATH    Custom models directory (advanced)
+  --envs ENV1,ENV2      Select environments to run (uses all their configured models)
+  --models ALIAS1,ALIAS2
+                        Select specific model aliases to run (across configured environments)
+  --parallel N          Run up to N selected models concurrently when used with --run
+  --energy-linear-config JSON
+                        JSON file with linear energy correction parameters (keys: a, b, mode)
+  --energy-linear-a A   Linear correction slope 'a' (requires also --energy-linear-b)
+  --energy-linear-b B   Linear correction intercept 'b' (requires also --energy-linear-a)
+  --energy-linear-mode MODE
+                        Linear correction mode: total_energy or per_atom (default: total_energy)
+  --correction_elements E1,E2
+                        Comma-separated element symbols present in the script (enables reference energy correction)
+  --no-energy-correction
+                        Disable any energy correction (ignores linear correction and --correction_elements)
+  --reference-energy-source {computed,precomputed}
+                        Source for --correction_elements: computed isolated atoms or scripts/reference_energies.csv
+
+run selection (required with --run):
+  --envs ENV1,ENV2    Run all configured models for the selected environments.
+  --models A1,A2      Run only the specified model aliases across environments where they are configured.
+
+examples:
+  ip-orch --add mace mace_mp
+  ip-orch --remove mace mace_mp
+  ip-orch --run script.py --envs mace,orb
+  ip-orch --run script.py --models mace-mp,orb-v3
+  ip-orch --supported-models mace
+  ip-orch --check-elements mace-mp C,Cu

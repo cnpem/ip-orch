@@ -14,7 +14,7 @@ def test_real_calculator_energy_forces():
     alias = os.environ.get("IPORCH_REAL_MODEL")
     if not alias:
         pytest.skip("Set IPORCH_REAL_MODEL in an environment with the real backend")
-    calc = ModelFactory.create(alias, device="cpu")
+    calc = ModelFactory.create(alias, device=os.environ.get("IPORCH_DEVICE", "cpu"))
     assert calc is not None
     atoms = bulk("Si", "diamond", a=5.43)
     atoms.positions[0, 0] += 0.03

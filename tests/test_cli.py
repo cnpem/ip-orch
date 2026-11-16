@@ -425,7 +425,7 @@ def test_cmd_run_preflight_failure_marks_model_broken(
     mock_set_model_status,
     mock_print,
 ):
-    """Stop execution and mark a model broken when element-energy preflight fails."""
+    """Mark a failed preflight without returning a false success."""
 
     mock_load_config.return_value = {
         "full_models": [["env1", "orb-v3"]],
@@ -547,3 +547,25 @@ def test_parallel_mixed_success_and_failure(monkeypatch):
     args = argparse.Namespace(script="script.py", models="orb-v3,mace-mp", envs=None, parallel=2)
     assert cmd_run(args) != 0
     assert states == {"orb-v3": "broken", "mace-mp": "ok"}
+
+
+def test_sequential_preflight_failure_does_not_skip_healthy_model(monkeypatch):
+    monkeypatch.setattr(
+        "ip_orch.cli.commands.load_config", lambda: {"full_models": [["broken", "orb-v3"], ["healthy", "mace-mp"]]}
+    )
+    monkeypatch.setattr("ip_orch.cli.commands._python_for_env", lambda *a: "/env/python")
+    states = {}
+    monkeypatch.setattr("ip_orch.cli.commands.set_model_status", lambda k, v: states.update({k: v}))
+    calls = []
+
+    def execute(cmd, **kwargs):
+        calls.append(cmd)
+        if "orb-v3" in cmd:
+            return subprocess.CompletedProcess(cmd, 9, stdout="", stderr="broken dependency")
+        return subprocess.CompletedProcess(cmd, 0, stdout="IPORCH_DEVICE=cpu\n", stderr="")
+
+    monkeypatch.setattr("ip_orch.cli.commands._run_subprocess", execute)
+    args = argparse.Namespace(script="script.py", models="orb-v3,mace-mp", envs=None, parallel=1)
+    assert cmd_run(args) == 2
+    assert states == {"orb-v3": "broken", "mace-mp": "ok"}
+    assert len(calls) == 3

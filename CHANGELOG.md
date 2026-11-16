@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 ### Audit corrections
+- Validated a clean Conda installation and simultaneous CUDA MACE/ORB execution.
+- Selected float32-highest for ORB after observing a GPU force-check discrepancy.
+- Added explicit benchmark validation and regenerated H/C/Si references with provenance.
+- Continued sequential execution after failed preflight and added backend failure tests.
 - Made linear potential transformations consistent for energy, free energy, forces and stress.
 - Fixed nonzero exit propagation for sequential worker failures.
 - Added locked CSV append with schema checks and concurrent-process regression coverage.
@@ -18,7 +22,7 @@ All notable changes to this project will be documented in this file.
 - Fixed Ruff import ordering and formatting in model builders.
 - Updated repository links and replaced the static build badge with the CI badge.
 - Added contribution and support guidelines and an explicit evidence-gap ledger.
-- Local Python 3.9–3.13 validation: 78 tests passed and one opt-in integration
+- Local Python 3.9–3.13 validation: 82 tests passed and one opt-in integration
   test skipped in each environment; real backend validation is reported separately.
 
 ### Changes recorded 2026-04-26

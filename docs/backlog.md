@@ -10,7 +10,7 @@ issue drafts, not claims that public issues exist.
 | Archive surface benchmark inputs | 20 slab/DFT cache files, calculation settings, locks and checkpoint hashes | public rerun reproduces reported RMSE |
 | Complete author disclosures | funding, prior AI use, exact tool versions, human review | no manuscript evidence placeholders |
 | Establish public development history | visibility/audit history and dated public PRs/issues | more than six months of distributed public development verified |
-| Validate accelerator parallelism | GPU memory, versions, concurrent success/failure logs | traceable outputs without lost records |
+| Review completed accelerator validation | real CUDA logs and precision-failure evidence in examples/benchmark/results/gpu | collaborator review of scope and memory limitations |
 | Regenerate reference energies | immutable checkpoints and environment metadata | auditable tables with per-row status |
 | Validate remaining model builders | each declared backend/version and checkpoint | finite energy/force logs and documented limitations |
 | Verify release and archive identity | PyPI artifacts, Git tag and Zenodo version DOI | metadata and archived code correspond |

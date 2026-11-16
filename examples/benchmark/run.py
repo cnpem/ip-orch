@@ -22,7 +22,9 @@ def main(calculator_name, ase_calculator):
     energy = float(atoms.get_potential_energy())
     forces = atoms.get_forces().copy()
     stress = atoms.get_stress().copy()
-    h = 1e-3
+    h = float(os.environ.get("IPORCH_FD_STEP", "0.001"))
+    if h <= 0:
+        raise ValueError("IPORCH_FD_STEP must be positive")
     atoms.positions[0, 0] += h
     plus = atoms.get_potential_energy()
     atoms.positions[0, 0] -= 2 * h
@@ -51,6 +53,7 @@ def main(calculator_name, ase_calculator):
         finite_difference_step_A=h,
         device=os.environ.get("MLIP_DEVICE", "cpu"),
         run_id=str(uuid.uuid4()),
+        builder_precision="float32-highest" if calculator_name.startswith("orb") else "backend default",
     )
     target = Path(os.environ.get("IPORCH_BENCHMARK_OUTPUT", "benchmark-results"))
     target.mkdir(parents=True, exist_ok=True)

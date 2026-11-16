@@ -27,3 +27,19 @@ physical validity outside a potential's training domain. Periodic-only models
 or models requiring neighbors may fail for isolated atoms. Reference shifts
 change absolute energies but do not improve interatomic forces or prove
 formation-energy accuracy.
+
+
+## Auditable regenerated subset
+
+`examples/benchmark/reference_atoms.py` regenerates H, C and Si references for
+one CPU backend. Run, for example:
+
+```sh
+python examples/benchmark/reference_atoms.py mace-mp-0 ./reference-results
+```
+
+Repeat in the ORB environment with orb-v3. Archived `reference-*.json` files in
+examples/benchmark/results include positions, cell, periodicity, units, versions,
+model and errors. Checkpoint hashes and environment records are alongside them.
+These are a new explicit subset and do not establish provenance for the legacy
+CSV values or demonstrate accuracy for isolated atoms outside training domains.

@@ -60,3 +60,22 @@ The parallel executor captures per-model stdout/stderr and returns nonzero if
 any worker fails. Each scientific script must synchronize its own shared output
 files. Prefer the benchmark's independent UUID JSON records. The bilayer CSV example uses a process lock and checks its schema. Other
 scripts (including historical notebooks) must implement their own locking.
+
+Real MACE/ORB parallel CUDA validation is archived in examples/benchmark/results/gpu.
+Only this small silicon task was measured; the orchestrator still does not reserve
+GPU memory. Conda installation was validated using Micromamba with
+PYTHONNOUSERSITE=1 to exclude unrelated user-site packages.
+
+## Tested Conda installation procedure
+
+```sh
+micromamba create -y -p /tmp/iporch-conda -c conda-forge python=3.11 pip
+PYTHONNOUSERSITE=1 /tmp/iporch-conda/bin/python -m pip install .
+PYTHONNOUSERSITE=1 /tmp/iporch-conda/bin/python -m pip check
+cd /tmp
+PYTHONNOUSERSITE=1 /tmp/iporch-conda/bin/ip-orch --help
+```
+
+`PYTHONNOUSERSITE=1` prevents unrelated packages in the user site directory from
+contaminating dependency inspection. Worker environments need their own backend
+installation; installing the orchestrator does not install MLIP dependencies.
