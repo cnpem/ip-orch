@@ -78,7 +78,7 @@ IP-Orch is designed to run the same user-defined ASE script across multiple mode
 
 <!-- ![IP-Orch architecture.\label{fig:arch}](iporch-architecture.png) -->
 
-![IP-Orch architecture.\label{fig:arch}](iporch-architecture.svg)
+![IP-Orch architecture.\label{fig:arch}](iporch-architecture.svg){ width=100% }
 
 This is implemented through a lightweight and modular architecture, as shown in Figure \ref{fig:arch}. A central `ModelFactory` creates ASE calculators from simple aliases, while the command-line interface and the `IPOrch` Python API share the same execution layer for environment discovery, model selection, and execution. During runtime, IP-Orch iterates over selected (environment, model) pairs and runs the user workflow inside each target environment using either the environment's Python executable (for local virtual environments) or `conda run` (for named Conda environments), ensuring isolation and avoiding dependency conflicts. Execution can be sequential or concurrent across selected pairs through a bounded parallel worker pool. The worker process also applies runtime safeguards such as model-alias validation, path-based virtual environment resolution, and notebook-safe subprocess settings. By delegating performance to the underlying MLIPs, IP-Orch focuses on providing a transparent and low-friction framework for reproducible benchmarking and comparison across models.
 
