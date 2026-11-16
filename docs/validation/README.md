@@ -21,3 +21,13 @@ JSON records are under examples/benchmark/results. GPU behavior remains untested
 
 The first remote CI run exposed unavailable Python 3.9 binaries on Ubuntu 26.04.
 That job now uses Ubuntu 22.04; other versions retain ubuntu-latest.
+
+Remote CI passed all five Python jobs and wheel/sdist installation checks:
+https://github.com/cnpem/ip-orch/actions/runs/43957054600.
+The initial official paper build exposed clipped labels in the legacy SVG;
+the replacement figure uses explicit bounds and larger labels.
+
+Remaining validation: Conda, GPU concurrency and backends other than the two
+recorded CPU integrations. The main branch has not been merged; public issues
+and PR creation returned HTTP 403 through the connector. Review and merge must
+be completed by collaborators with an authorized publishing channel.

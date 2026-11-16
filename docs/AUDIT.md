@@ -13,7 +13,8 @@ This file tracks evidence gaps, not completion claims.
   checkpoint versions, measured outputs and publication links. A newly created
   benchmark cannot establish prior research impact.
 - Real MACE and ORB CPU execution and isolated virtualenv installation are recorded in examples/benchmark/results. GPU concurrency, Conda installation,
-  reference-table provenance and remote CI remain to be validated.
+  reference-table provenance remain to be validated. Remote CI passed:
+  https://github.com/cnpem/ip-orch/actions/runs/43957054600.
 - Manuscript AI disclosure, funding, ownership require
   factual author confirmation. This audit used OpenAI Codex for code/document
   changes; exact model/build information and human review must be recorded by
