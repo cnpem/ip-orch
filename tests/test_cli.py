@@ -513,3 +513,37 @@ def test_worker_resource_path():
 
     assert _worker_resource_path().endswith(os.path.join("ip_orch", "core", "worker.py"))
     assert _package_parent_path()
+
+
+def test_sequential_worker_failure_returns_nonzero(monkeypatch):
+    monkeypatch.setattr("ip_orch.cli.commands.load_config", lambda: {"full_models": [["env", "orb-v3"]]})
+    monkeypatch.setattr("ip_orch.cli.commands._python_for_env", lambda *a: "/env/python")
+    monkeypatch.setattr("ip_orch.cli.commands.set_model_status", lambda *a: None)
+    results = iter(
+        [
+            subprocess.CompletedProcess([], 0, stdout="IPORCH_DEVICE=cpu\n"),
+            subprocess.CompletedProcess([], 7),
+        ]
+    )
+    monkeypatch.setattr("ip_orch.cli.commands._run_subprocess", lambda *a, **kw: next(results))
+    args = argparse.Namespace(script="script.py", models="orb-v3", envs=None, parallel=1)
+    assert cmd_run(args) != 0
+
+
+def test_parallel_mixed_success_and_failure(monkeypatch):
+    monkeypatch.setattr(
+        "ip_orch.cli.commands.load_config", lambda: {"full_models": [["env1", "orb-v3"], ["env2", "mace-mp"]]}
+    )
+    monkeypatch.setattr("ip_orch.cli.commands._python_for_env", lambda *a: "/env/python")
+    states = {}
+    monkeypatch.setattr("ip_orch.cli.commands.set_model_status", lambda k, v: states.update({k: v}))
+
+    def execute(cmd, **kwargs):
+        if cmd[-1] == "device":
+            return subprocess.CompletedProcess(cmd, 0, stdout="IPORCH_DEVICE=cpu\n", stderr="")
+        return subprocess.CompletedProcess(cmd, 9 if "orb-v3" in cmd else 0, stdout="", stderr="failure")
+
+    monkeypatch.setattr("ip_orch.cli.commands._run_subprocess", execute)
+    args = argparse.Namespace(script="script.py", models="orb-v3,mace-mp", envs=None, parallel=2)
+    assert cmd_run(args) != 0
+    assert states == {"orb-v3": "broken", "mace-mp": "ok"}

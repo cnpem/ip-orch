@@ -9,7 +9,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
 WORKDIR /workspace
 
 ARG MACE_REPO=https://github.com/ACEsuit/mace.git
-ARG MACE_REF=main
+ARG MACE_REF=9e223a1dd2e20eacd8e6bd551775adc7bd3a0682
 ARG ORB_REPO=https://github.com/orbital-materials/orb-models.git
 ARG ORB_REF=v0.5.5
 ARG INSTALL_CUML=false

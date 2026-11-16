@@ -9,8 +9,9 @@ jobs:
     runs-on: ubuntu-latest
 
     strategy:
+      fail-fast: false
       matrix:
-        python-version: ["3.10", "3.11", "3.12"]
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
 
     steps:
       - uses: actions/checkout@v4
@@ -31,3 +32,24 @@ jobs:
 
       - name: Run tests
         run: pytest
+
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install build
+      - run: python -m build
+      - name: Install wheel outside checkout
+        run: |
+          python -m venv /tmp/iporch-wheel
+          /tmp/iporch-wheel/bin/pip install dist/*.whl
+          cd /tmp
+          /tmp/iporch-wheel/bin/ip-orch --help
+          /tmp/iporch-wheel/bin/python -c "from importlib.resources import files; assert all(files('ip_orch.scripts').joinpath(n).is_file() for n in ('reference_energies.csv', 'isolated_atom_energies.csv'))"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: distributions
+          path: dist/*

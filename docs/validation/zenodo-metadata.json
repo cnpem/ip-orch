@@ -1,0 +1,80 @@
+{
+  "id": 21357945,
+  "metadata": {
+    "title": "IP-Orch - Interatomic Potentials Orchestrator",
+    "doi": "10.5281/zenodo.21357945",
+    "publication_date": "2026-07-14",
+    "description": "<p>Python package for orchestrating machine learning interatomic potentials.</p>",
+    "access_right": "open",
+    "creators": [
+      {
+        "name": "Zanineli, Pedro",
+        "affiliation": "Brazilian Center for Research in Energy and Materials",
+        "orcid": "0009-0008-2359-5218"
+      },
+      {
+        "name": "Santos, Mauri",
+        "affiliation": "Brazilian Center for Research in Energy and Materials",
+        "orcid": "0009-0004-8919-3079"
+      },
+      {
+        "name": "Focassio, Bruno",
+        "affiliation": "Brazilian Center for Research in Energy and Materials",
+        "orcid": "0000-0003-4811-7729"
+      },
+      {
+        "name": "Schleder, Gabriel",
+        "affiliation": "Brazilian Center for Research in Energy and Materials",
+        "orcid": "0000-0003-3129-8682"
+      }
+    ],
+    "version": "1.0.0",
+    "custom": {
+      "code:codeRepository": "https://github.com/cnpem/ip-orch/tree/main",
+      "code:programmingLanguage": [
+        {
+          "id": "python",
+          "title": {
+            "en": "Python"
+          }
+        }
+      ],
+      "code:developmentStatus": {
+        "id": "active",
+        "title": {
+          "en": "Active"
+        }
+      }
+    },
+    "resource_type": {
+      "title": "Software",
+      "type": "software"
+    },
+    "license": {
+      "id": "mit-license"
+    },
+    "relations": {
+      "version": [
+        {
+          "index": 0,
+          "is_last": true,
+          "parent": {
+            "pid_type": "recid",
+            "pid_value": "21357944"
+          }
+        }
+      ]
+    }
+  },
+  "files": [
+    {
+      "id": "a64765c9-1194-4db2-81e3-ab32805cb3c1",
+      "key": "ip-orch.zip",
+      "size": 2107018,
+      "checksum": "md5:3de70bc20b431b002ded49ce5973bbc7",
+      "links": {
+        "self": "https://zenodo.org/api/records/21357945/files/ip-orch.zip/content"
+      }
+    }
+  ]
+}

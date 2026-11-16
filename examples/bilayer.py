@@ -1,9 +1,10 @@
-import csv
 import logging
 import os
 from pathlib import Path
 
 from ase.build import graphene
+
+from ip_orch.core.results import append_csv
 
 logging.basicConfig(level=logging.INFO, format="%(message)s")
 logger = logging.getLogger(__name__)
@@ -45,11 +46,6 @@ def main(calculator_name, ase_calculator):
         "binding_energy_ev_per_atom": e_binding_per_atom,
     }
 
-    write_header = not csv_path.exists()
-    with csv_path.open("a", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=row.keys())
-        if write_header:
-            writer.writeheader()
-        writer.writerow(row)
+    append_csv(csv_path, row)
 
     logger.info("Appended graphene bilayer result for %s to %s", calculator_name, csv_path)

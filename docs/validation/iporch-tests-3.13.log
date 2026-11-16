@@ -1,0 +1,11 @@
+s....................................................................... [ 91%]
+.......                                                                  [100%]
+=============================== warnings summary ===============================
+tests/test_energy_correction.py: 20 warnings
+tests/test_examples.py: 242 warnings
+  /tmp/iporch-test-3.13/lib/python3.13/site-packages/ase/atoms.py:432: DeprecationWarning: Setting the shape on a NumPy array has been deprecated in NumPy 2.5.
+  As an alternative, you can create a new view using np.reshape (with copy=False if needed).
+    a.shape = (-1,) + shape
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+78 passed, 1 skipped, 262 warnings in 1.42s

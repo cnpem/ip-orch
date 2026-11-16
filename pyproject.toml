@@ -14,7 +14,7 @@ description = "Lightweight orchestration for machine-learning interatomic potent
 readme = "README.md"
 requires-python = ">=3.9"
 license = "MIT"
-license-files = ["LICENSE"]
+license-files = ["LICENSE", "THIRD_PARTY_NOTICES.md"]
 keywords = [
     "ase",
     "atomistic-simulation",
@@ -42,13 +42,14 @@ dependencies = [
     "rich",
     "numpy",
     "pandas",
+    "filelock>=3.12",
 ]
 
 [project.urls]
-Homepage = "https://github.com/pedrozanineli/ip-orch"
-Repository = "https://github.com/pedrozanineli/ip-orch"
-Issues = "https://github.com/pedrozanineli/ip-orch/issues"
-Documentation = "https://github.com/pedrozanineli/ip-orch#readme"
+Homepage = "https://github.com/cnpem/ip-orch"
+Repository = "https://github.com/cnpem/ip-orch"
+Issues = "https://github.com/cnpem/ip-orch/issues"
+Documentation = "https://github.com/cnpem/ip-orch#readme"
 
 [tool.setuptools.packages.find]
 where = ["."]
@@ -70,6 +71,7 @@ dev = [
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 python_files = ["test_*.py"]
+markers = ["integration: opt-in real MLIP backend calculations"]
 
 [tool.ruff]
 line-length = 120

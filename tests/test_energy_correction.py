@@ -102,3 +102,28 @@ def test_wrap_reference_energy_correction_subtracts_element_baseline():
 
     assert atoms.get_potential_energy() == pytest.approx(1.0)
     assert atoms.calc.results["energy_mlip"] == pytest.approx(5.0)
+
+
+@pytest.mark.parametrize("mode", ["total_energy", "per_atom"])
+def test_linear_potential_has_consistent_derivatives(mode):
+    import numpy as np
+    from ase.build import bulk
+    from ase.calculators.emt import EMT
+
+    atoms = bulk("Cu", "fcc", a=3.7).repeat((2, 1, 1))
+    atoms.positions[0, 0] += 0.05
+    atoms.calc = EMT()
+    raw_forces = atoms.get_forces()
+    raw_stress = atoms.get_stress()
+    raw_free = atoms.get_potential_energy(force_consistent=True)
+    atoms.calc = wrap_linear_energy_correction(EMT(), a=2.0, b=1.0, mode=mode)
+    np.testing.assert_allclose(atoms.get_forces(), 2 * raw_forces)
+    np.testing.assert_allclose(atoms.get_stress(), 2 * raw_stress)
+    expected = 2 * raw_free + (len(atoms) if mode == "per_atom" else 1)
+    assert atoms.get_potential_energy(force_consistent=True) == pytest.approx(expected)
+    h = 1e-5
+    atoms.positions[0, 0] += h
+    plus = atoms.get_potential_energy()
+    atoms.positions[0, 0] -= 2 * h
+    minus = atoms.get_potential_energy()
+    assert -(plus - minus) / (2 * h) == pytest.approx(2 * raw_forces[0, 0], abs=1e-6)

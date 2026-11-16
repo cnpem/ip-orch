@@ -111,6 +111,7 @@ def wrap_reference_energy_correction(
             super().__init__()
 
         def calculate(self, atoms=None, properties=("energy",), system_changes=all_changes):  # type: ignore[override]
+            super().calculate(atoms, properties, system_changes)
             base_calc.calculate(atoms, properties, system_changes)
             self.results = dict(getattr(base_calc, "results", {}))
 
@@ -146,7 +147,9 @@ def wrap_linear_energy_correction(
     b: float | None,
     mode: LinearCorrectionMode = "total_energy",
 ) -> TCalc:
-    """Optionally wrap an ASE calculator to correct only the energy result.
+    """Transform an ASE potential consistently: energies, forces and stress.
+
+    Forces and stress are multiplied by a; constant offsets have zero gradient.
 
     If either ``a`` or ``b`` is ``None``, the calculator is returned unchanged.
     """
@@ -168,22 +171,20 @@ def wrap_linear_energy_correction(
             super().__init__()
 
         def calculate(self, atoms=None, properties=("energy",), system_changes=all_changes):  # type: ignore[override]
+            super().calculate(atoms, properties, system_changes)
             base_calc.calculate(atoms, properties, system_changes)
             self.results = dict(getattr(base_calc, "results", {}))
 
             natoms = len(atoms) if atoms is not None else 0
-            # Keep compatibility: expose corrected energy as the main output key
-            # while preserving original MLIP energy for downstream scripts.
-            if "energy" in self.results:
-                raw = self.results["energy"]
-                self.results["energy_mlip"] = raw
-                self.results["energy"] = apply_linear_correction(raw, natoms, a, b, mode)
-            elif "free_energy" in self.results and "energy" in properties:
-                # Some calculators provide only free_energy; keep it untouched and
-                # still provide a corrected "energy" output.
-                raw = self.results["free_energy"]
-                self.results["energy_mlip"] = raw
-                self.results["energy"] = apply_linear_correction(raw, natoms, a, b, mode)
+            for key in ("energy", "free_energy"):
+                if key in self.results:
+                    raw = self.results[key]
+                    self.results[f"{key}_mlip"] = raw
+                    self.results[key] = apply_linear_correction(raw, natoms, a, b, mode)
+            for key in ("forces", "stress"):
+                if key in self.results:
+                    self.results[f"{key}_mlip"] = self.results[key].copy()
+                    self.results[key] = a * self.results[key]
 
         def __getattr__(self, name):
             return getattr(base_calc, name)

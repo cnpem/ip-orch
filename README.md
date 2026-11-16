@@ -12,14 +12,14 @@
 </p>
 
 <p align="left">
-  <a href="https://github.com/pedrozanineli/ip-orch/blob/main/LICENSE">
+  <a href="https://github.com/cnpem/ip-orch/blob/main/LICENSE">
     <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License">
   </a>
   <!-- <a href="https://github.com/yourusername/yourproject/releases">
     <img src="https://img.shields.io/badge/version-1.0.0-green.svg" alt="Version">
   </a> -->
-  <a href="https://github.com/pedrozanineli/ip-orch/actions">
-    <img src="https://img.shields.io/badge/build-passing-brightgreen.svg" alt="Build Status">
+  <a href="https://github.com/cnpem/ip-orch/actions">
+    <img src="https://github.com/cnpem/ip-orch/actions/workflows/ci.yml/badge.svg" alt="Build Status">
   </a>
 </p>
 
@@ -52,7 +52,7 @@ With the rapid growth of Machine Learning Interatomic Potentials (MLIPs) with di
 - Orchestrates a single ASE script across multiple MLIP environments/models.
 - Keeps model aliases + configuration in a local config store.
 - Provides an interactive setup flow to discover Conda environments.
-- Optional post-processing energy correction (linear and element-reference shift).
+- Optional consistent potential energy correction (linear and element-reference shift).
 - Rich terminal output + per-model success/broken status.
 
 ## Installation
@@ -61,7 +61,7 @@ With the rapid growth of Machine Learning Interatomic Potentials (MLIPs) with di
 
 ```bash
 # Clone the repository
-git clone https://github.com/pedrozanineli/ip-orch
+git clone https://github.com/cnpem/ip-orch
 
 # Navigate to the project directory
 cd ip-orch
@@ -100,7 +100,7 @@ ip-orch --run /workspace/ip-orch/examples/calculators_test.py --envs mace,orb
 The GitHub Actions workflow in `.github/workflows/docker.yml` builds this image on pull requests and pushes it to GitHub Container Registry on pushes to `main` and version tags. The default image name is:
 
 ```bash
-ghcr.io/pedrozanineli/ip-orch:latest
+ghcr.io/cnpem/ip-orch:latest
 ```
 
 ## Usage
@@ -135,13 +135,14 @@ The script must be defined as a `main()` function and receive `calculator_name, 
 ```python
 import sys
 from ase import Atoms
-from ase import build 
+from ase import build
+
 
 def main(calculator_name, ase_calculator):
-    molecule = build.molecule('H2O')
+    molecule = build.molecule("H2O")
     molecule.calc = ase_calculator
     e_molecule = molecule.get_potential_energy()
-    print(f'Molecule energy {e_molecule:.4f} eV')
+    print(f"Molecule energy {e_molecule:.4f} eV")
 ```
 
 With the configured script and environments, the script can be executed with multiple models. The current available models are 1) using all MLIPs available in a given environment (e.g. all models available from MACE) or 2) specified models configured in the package.
@@ -168,11 +169,13 @@ from ase.build import bulk
 
 from ip_orch import IPOrch
 
+
 def calculators_test(calculator_name, ase_calculator):
     atoms = bulk("Cu", "fcc", a=3.6)
     atoms.calc = ase_calculator
     energy = atoms.get_potential_energy()
     print(f"{calculator_name}: {energy:.6f} eV")
+
 
 orch = IPOrch()
 orch.run(
@@ -260,6 +263,7 @@ IP-Orch runs the user script once per selected model, so scripts should save the
 import csv
 from pathlib import Path
 
+
 def main(calculator_name, ase_calculator):
     energy = ...
     row = {"model": calculator_name, "energy_ev": energy}
@@ -299,8 +303,31 @@ IPORCH_RESULTS_CSV=results/bilayer.csv ip-orch --run examples/bilayer.py --model
 
 ## Contributions and suggestions
 
-For bugs or feature requests, please use [GitHub Issues](https://github.com/pedrozanineli/ip-orch/issues).
+For bugs or feature requests, please use [GitHub Issues](https://github.com/cnpem/ip-orch/issues).
 
 ## License
 
-IP-Orch is published and distributed under the MIT License.
+IP-Orch is published and distributed under the MIT License. Copyright © 2026
+IP-Orch contributors; see [LICENSE](LICENSE) and [third-party notices](THIRD_PARTY_NOTICES.md).
+
+
+## Validation and scientific use
+
+The saved surface benchmark notebook records actual multi-model execution,
+including DFT comparisons. See [research evidence](docs/research-evidence.md)
+for measured values and missing provenance. The [portable silicon benchmark](examples/benchmark/README.md)
+provides input and structured outputs for new runs. No throughput advantage or
+independent adoption is inferred from the existence of these examples.
+
+## Documentation
+
+- [API and configuration](docs/api.md)
+- [Models and compatibility](docs/models.md)
+- [Reference-energy provenance](docs/reference-energies.md)
+- [Contributing](CONTRIBUTING.md) and [support](SUPPORT.md)
+
+Linear corrections transform the potential: `E'=a E+b` (or `a E+b N`),
+`F'=a F`, and `stress'=a stress`. Both energy and free energy are transformed.
+This changes relaxation and dynamics when `a != 1`; coefficients fitted only to
+energy data do not establish physically accurate forces. Element reference
+shifts are constant for fixed composition and leave derivatives unchanged.

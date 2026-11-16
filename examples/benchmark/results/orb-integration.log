@@ -1,0 +1,25 @@
+.                                                                        [100%]
+=============================== warnings summary ===============================
+tests/integration/test_real_models.py::test_real_calculator_energy_forces
+  /tmp/iporch-orb/lib/python3.11/site-packages/torch/jit/_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+    warnings.warn(
+
+tests/integration/test_real_models.py::test_real_calculator_energy_forces
+  /tmp/iporch-orb/lib/python3.11/site-packages/orb_models/utils.py:30: UserWarning: Setting global torch default dtype to torch.float32.
+    warnings.warn(f"Setting global torch default dtype to {torch_dtype}.")
+
+tests/integration/test_real_models.py::test_real_calculator_energy_forces
+tests/integration/test_real_models.py::test_real_calculator_energy_forces
+tests/integration/test_real_models.py::test_real_calculator_energy_forces
+tests/integration/test_real_models.py::test_real_calculator_energy_forces
+tests/integration/test_real_models.py::test_real_calculator_energy_forces
+tests/integration/test_real_models.py::test_real_calculator_energy_forces
+  /tmp/iporch-orb/lib/python3.11/site-packages/ase/geometry/cell.py:40: DeprecationWarning: __array__ implementation doesn't accept a copy keyword, so passing copy=False failed. __array__ must implement 'dtype' and 'copy' keyword arguments. To learn more, see the migration guide https://numpy.org/devdocs/numpy_2_0_migration_guide.html#adapting-to-changes-in-the-copy-keyword
+    x = np.dot(cell[j], cell[k]) / ll
+
+tests/integration/test_real_models.py::test_real_calculator_energy_forces
+  /tmp/iporch-orb/lib/python3.11/site-packages/triton/knobs.py:504: UserWarning: TRITON_DEFAULT_FP_FUSION is unset: defaulting to FP fusion ENABLED for backward compatibility in Triton 3.9. The default will change to DISABLED in Triton 3.10; set TRITON_DEFAULT_FP_FUSION=1 to keep fusion enabled or =0 to adopt the new default early and silence this warning.
+    warn_once(FP_FUSION_DEFAULT_WARNING)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+1 passed, 9 warnings in 31.38s

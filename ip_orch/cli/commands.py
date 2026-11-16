@@ -580,6 +580,7 @@ def cmd_run(args: argparse.Namespace) -> int:
         )
 
     if parallel == 1:
+        failed = False
         for env_name, model_name in selected_pairs:
             job, preflight_error = prepare_job(env_name, model_name)
             if preflight_error:
@@ -597,10 +598,11 @@ def cmd_run(args: argparse.Namespace) -> int:
             result = run_job(job, capture_output=False)
             persist_status(model_name, result.returncode)
             if result.returncode != 0:
+                failed = True
                 console.print(f"[red]Failed for {env_name} ({model_name})")
             else:
                 console.print(f"[green]Success: {model_name}")
-        return 0
+        return 1 if failed else 0
 
     jobs = []
     had_preflight_error = False

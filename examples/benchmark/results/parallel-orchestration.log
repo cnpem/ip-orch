@@ -1,0 +1,60 @@
+╭──────────────────────────────────────────────────────────────────────────────╮
+│ IP-Orch: starting execution | running up to 2 models in parallel             │
+│ /tmp/iporch-mace → mace-mp-0                                                 │
+│ /tmp/iporch-orb → orb-v3                                                     │
+╰──────────────────────────────────────────────────────────────────────────────╯
+╭──────────────────────────────────────────────────────────────────────────────╮
+│ /TMP/IPORCH-MACE → mace-mp-0 | device = cpu                                  │
+│ /tmp/iporch-mace/bin/python                                                  │
+│ /home/pedro.zanineli/Projects/main/ip-orch/ip_orch/core/worker.py            │
+│ /home/pedro.zanineli/Projects/main/ip-orch/examples/benchmark/run.py         │
+│ /tmp/iporch-mace mace-mp-0  /home/pedro.zanineli/Projects/main/ip-orch       │
+╰──────────────────────────────────────────────────────────────────────────────╯
+cuequivariance or cuequivariance_torch is not available. Cuequivariance 
+acceleration will be disabled.
+Using Materials Project MACE for MACECalculator with 
+/home/pedro.zanineli/.cache/mace/MACE_MPtrj_20229model
+Using float32 for MACECalculator, which is faster but less accurate. Recommended
+for MD. Use float64 for geometry optimization.
+Using CPU
+Using head Default out of ['Default']
+Default dtype float32 does not match model dtype float64, converting models to 
+float32.
+{"model": "mace-mp-0", "python": "3.11.16 (main, Aug 14 2026, 15:35:36) [Clang 
+22.1.3 ]", "platform": "Linux-6.17.0-1033-oem-x86_64-with-glibc2.39", 
+"versions": {"ip-orch": "1.0.0", "ase": "3.29.0", "numpy": "2.4.6", "torch": 
+"2.15.0", "mace-torch": "0.3.14"}, "input_sha256": 
+"8dca16f60a5c40789821c806e8f7c56677075ff7b80de3490c9a6584c7c0e3b3", "energy_eV":
+-10.720876693725586, "forces_eV_per_A": [[-0.18059256672859192, 
+5.4426891438197345e-08, 9.30131136556156e-08], [0.18059256672859192, 
+-5.029141902923584e-08, -9.499490261077881e-08]], "stress_eV_per_A3": 
+[-0.01241837628185749, -0.012620670720934868, -0.012620661407709122, 
+-0.004206646699458361, 1.0883286272189707e-08, 6.602922208998052e-09], 
+"numerical_force_eV_per_A": -0.1811981201171875, "force_difference_eV_per_A": 
+0.0006055533885955811, "finite_difference_step_A": 0.001, "device": "cpu", 
+"run_id": "26fb2586-0b0f-4754-b7b3-2d8b0fc308a3"}
+Success: mace-mp-0
+╭──────────────────────────────────────────────────────────────────────────────╮
+│ /TMP/IPORCH-ORB → orb-v3 | device = cpu                                      │
+│ /tmp/iporch-orb/bin/python                                                   │
+│ /home/pedro.zanineli/Projects/main/ip-orch/ip_orch/core/worker.py            │
+│ /home/pedro.zanineli/Projects/main/ip-orch/examples/benchmark/run.py         │
+│ /tmp/iporch-orb orb-v3  /home/pedro.zanineli/Projects/main/ip-orch           │
+╰──────────────────────────────────────────────────────────────────────────────╯
+cache of 
+https://orbitalmaterials-public-models.s3.us-west-1.amazonaws.com/forcefields/or
+b-v3/orb-v3-conservative-inf-omat-20250404.ckpt is up-to-date
+{"model": "orb-v3", "python": "3.11.16 (main, Aug 14 2026, 15:35:36) [Clang 
+22.1.3 ]", "platform": "Linux-6.17.0-1033-oem-x86_64-with-glibc2.39", 
+"versions": {"ip-orch": "1.0.0", "ase": "3.29.0", "numpy": "2.4.6", "torch": 
+"2.15.0", "orb-models": "0.5.5"}, "input_sha256": 
+"8dca16f60a5c40789821c806e8f7c56677075ff7b80de3490c9a6584c7c0e3b3", "energy_eV":
+-10.822043418884277, "forces_eV_per_A": [[-0.39554542303085327, 
+-0.00021122174803167582, -0.0005096195382066071], [0.39554545283317566, 
+0.00021122470207046717, 0.0005096193635836244]], "stress_eV_per_A3": 
+[-0.009023230522871017, -0.00936424732208252, -0.009338904172182083, 
+-0.007446154486387968, -2.1513807951123454e-05, 2.1109715817146935e-05], 
+"numerical_force_eV_per_A": -0.3981590270996094, "force_difference_eV_per_A": 
+0.0026136040687561035, "finite_difference_step_A": 0.001, "device": "cpu", 
+"run_id": "469367c2-fa00-4391-a87b-859a8740e1a9"}
+Success: orb-v3

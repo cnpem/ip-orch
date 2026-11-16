@@ -73,3 +73,6 @@ Thumbs.db
 *.swp
 *.swo
 *~
+benchmark-results/
+*.csv.lock
+paper/paper.pdf

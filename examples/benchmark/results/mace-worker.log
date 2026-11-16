@@ -1,0 +1,7 @@
+cuequivariance or cuequivariance_torch is not available. Cuequivariance acceleration will be disabled.
+Using Materials Project MACE for MACECalculator with /home/pedro.zanineli/.cache/mace/MACE_MPtrj_20229model
+Using float32 for MACECalculator, which is faster but less accurate. Recommended for MD. Use float64 for geometry optimization.
+Using CPU
+Using head Default out of ['Default']
+Default dtype float32 does not match model dtype float64, converting models to float32.
+{"model": "mace-mp-0", "python": "3.11.16 (main, Aug 14 2026, 15:35:36) [Clang 22.1.3 ]", "platform": "Linux-6.17.0-1033-oem-x86_64-with-glibc2.39", "versions": {"ip-orch": "1.0.0", "ase": "3.29.0", "numpy": "2.4.6", "torch": "2.15.0", "mace-torch": "0.3.14"}, "input_sha256": "8dca16f60a5c40789821c806e8f7c56677075ff7b80de3490c9a6584c7c0e3b3", "energy_eV": -10.720876693725586, "forces_eV_per_A": [[-0.1805926412343979, 4.825346877623815e-08, -8.958090802480001e-08], [0.1805926263332367, -5.029141902923584e-08, 9.872019290924072e-08]], "stress_eV_per_A3": [-0.012418370693922043, -0.01262063067406416, -0.012620658613741398, -0.004206680692732334, -6.6664167519547846e-09, 1.393184345666043e-09], "numerical_force_eV_per_A": -0.18072128295898438, "force_difference_eV_per_A": 0.00012864172458648682, "finite_difference_step_A": 0.001, "device": "cpu", "run_id": "6ff4dd39-cff6-43fa-b1dc-76bb825430fd"}

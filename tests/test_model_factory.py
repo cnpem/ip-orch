@@ -90,3 +90,9 @@ def test_create_nequip_models(mock_expanduser):
         compile_path=os.path.join("/temp", "nequip-OAM-XL.nequip.pt2"),
         device="cpu",
     )
+
+
+def test_device_environment_overrides_auto_detection(monkeypatch):
+    monkeypatch.setenv("MLIP_DEVICE", "cpu")
+    assert ModelFactory.resolve_device() == "cpu"
+    assert ModelFactory.resolve_device("cuda:1") == "cuda:1"

@@ -45,6 +45,8 @@ class ModelFactory:
     def _device_to_str(device: Optional[str]) -> str:
         if device:
             return device
+        if os.environ.get("MLIP_DEVICE"):
+            return os.environ["MLIP_DEVICE"]
         if _HAS_TORCH:
             return "cuda" if torch.cuda.is_available() else "cpu"
         return os.environ.get("MLIP_DEVICE", "cpu")

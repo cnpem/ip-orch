@@ -2,7 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased] - 2026-04-26
+## [Unreleased]
+
+### Audit corrections
+- Made linear potential transformations consistent for energy, free energy, forces and stress.
+- Fixed nonzero exit propagation for sequential worker failures.
+- Added locked CSV append with schema checks and concurrent-process regression coverage.
+- Added portable silicon benchmark, opt-in integration tests, and research evidence extracted from the saved surface notebook.
+- Validated MACE 0.3.14 and ORB 0.5.5 in isolated CPU environments and a parallel two-model orchestration run.
+- Corrected project MIT attribution while preserving the historical Bootstrap notice in THIRD_PARTY_NOTICES.md.
+- Pinned Docker MACE source to the verified v0.3.14 commit.
+- Renamed the manuscript to paper/paper.md and added required sections with explicit author evidence gaps.
+- Added API, model, reference provenance and release documentation.
+- Extended CI coverage to Python 3.9 and 3.13, with independent matrix failures.
+- Fixed Ruff import ordering and formatting in model builders.
+- Updated repository links and replaced the static build badge with the CI badge.
+- Added contribution and support guidelines and an explicit evidence-gap ledger.
+- Local Python 3.9–3.13 validation: 78 tests passed and one opt-in integration
+  test skipped in each environment; real backend validation is reported separately.
+
+### Changes recorded 2026-04-26
 
 ### Added
 - Added a programmatic Python API through `IPOrch`, including direct callable execution for `run(...)` and class methods for CLI-equivalent actions.
@@ -28,7 +47,7 @@ All notable changes to this project will be documented in this file.
 - Preserved path-like virtualenv names such as `./mace` and resolved them to their Python executables instead of passing them to Conda as environment names.
 - Sanitized notebook Matplotlib inline backends in worker subprocesses by defaulting to `MPLBACKEND=Agg`.
 
-## [Unreleased] - 2026-04-21
+### Changes recorded 2026-04-21
 
 ### Added
 - Created `ip_orch/core/worker.py` to decouple execution logic from `commands.py`.

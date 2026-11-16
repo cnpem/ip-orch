@@ -86,11 +86,12 @@ def build_matris_10m_oam(ctx: ModelBuildContext) -> Any:
 
 @model_builder("sevennet_omni")
 def build_sevennet_omni(ctx: ModelBuildContext) -> Any:
-    from sevenn.calculator import SevenNetCalculator
     from sevenn.calculator import SevenNetD3Calculator
 
-    # return SevenNetCalculator(model="7net-omni", device=ctx.device, modal="mpa")
-    return SevenNetD3Calculator(model='7net-omni', modal="mpa", device=ctx.device,functional_name='pbe',damping_type='damp_bj')
+    return SevenNetD3Calculator(
+        model="7net-omni", modal="mpa", device=ctx.device, functional_name="pbe", damping_type="damp_bj"
+    )
+
 
 @model_builder("nequip_oam_l")
 def build_nequip_oam_l(ctx: ModelBuildContext) -> Any:
@@ -103,7 +104,7 @@ def build_nequip_oam_l(ctx: ModelBuildContext) -> Any:
 @model_builder("tace_v1_oam_m")
 def build_tace_v1_oam_m(ctx: ModelBuildContext) -> Any:
     from tace.foundations import tace_foundations
-    from tace.interface.ase import TACEAseCalc, add_dispersion  # noqa: F401
+    from tace.interface.ase import TACEAseCalc
 
     model = tace_foundations["TACE-v1-OAM-M"]
     return TACEAseCalc(model=model, dtype="float32", device=ctx.device, level=0)
@@ -161,7 +162,7 @@ def build_matris_10m_mp(ctx: ModelBuildContext) -> Any:
 def build_mattersim_v1(ctx: ModelBuildContext) -> Any:
     from mattersim.forcefield import MatterSimCalculator
 
-    return MatterSimCalculator(load_path="MatterSim-v1.0.0-5M.pth", device=ctx.device)
+    return MatterSimCalculator(load_path=_model_file(ctx, "MatterSim-v1.0.0-5M.pth"), device=ctx.device)
 
 
 @model_builder("grace_1l_oam")
