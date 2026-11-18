@@ -220,6 +220,8 @@ Taking into consideration that Machine Learning Interatomic Potentials can be tr
 
 This correction computes element-wise reference energies using the same MLIP (e.g., isolated atoms in a large non-periodic box) and subtracts their contribution from the total energy of a structure, based on its composition. The set of elements can be specified via the `--correction_elements` flag. By default, the reference energies are evaluated from the MLIP itself. Alternatively, `--reference-energy-source precomputed` reads bundled values from `ip_orch/scripts/reference_energies.csv`, avoiding the isolated-atom preflight. This approach aligns the energy zero across different models, enabling consistent comparison of quantities such as formation, surface, and interaction energies. This correction can also be combined with an optional linear adjustment of the energy (via `--energy-linear-a`, `--energy-linear-b`, and `--energy-linear-mode`) to account for systematic scaling differences between models.
 
+**Provenance warning:** bundled precomputed references are legacy values without complete model/checkpoint provenance. Availability is not validation. For research, compute references with the actual backend and archive its settings; see [reference-energy provenance](docs/reference-energies.md). A warning is emitted when legacy values are loaded.
+
 GRACE, MatRIS, and M3GNet calculators are not used for computed isolated-atom reference energies. They also do not have bundled precomputed reference energies in `reference_energies.csv`.
 
 ```bash
@@ -312,6 +314,8 @@ IP-Orch contributors; see [LICENSE](LICENSE) and [third-party notices](THIRD_PAR
 
 
 ## Validation and scientific use
+
+IP-Orch was used in the [cross-geometry transferability assessment of universal MLIPs for zirconia](https://doi.org/10.48550/arXiv.2608.06662) (Zanineli, Focassio and Schleder, 2026). Section II.C describes its role in the zero-shot comparison of 26 pretrained MLIPs across five geometry classes. See [research evidence](docs/research-evidence.md).
 
 The saved surface benchmark notebook records actual multi-model execution,
 including DFT comparisons. See [research evidence](docs/research-evidence.md)

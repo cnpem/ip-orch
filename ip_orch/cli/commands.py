@@ -24,6 +24,7 @@ from ..config.config_store import (
     set_model_status,
 )
 from ..core.reference_energies import (
+    LEGACY_REFERENCE_WARNING,
     check_reference_elements,
     is_reference_energy_computable,
     load_precomputed_reference_energies,
@@ -288,7 +289,7 @@ def cmd_check_elements(args: argparse.Namespace) -> int:
     table = _element_status_table(set(supported), requested=requested)
     _, missing = check_reference_elements(model, elements) if elements else ([], [])
     border_style = "red" if missing else "green"
-    console.print(Panel(table, title=title, border_style=border_style))
+    console.print(Panel(table, title=title, subtitle=LEGACY_REFERENCE_WARNING, border_style=border_style))
     return 1 if missing else 0
 
 

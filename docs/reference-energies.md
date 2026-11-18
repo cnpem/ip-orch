@@ -9,7 +9,11 @@ Do not use them for publication without regenerating and archiving provenance.
 values are energies in eV. Missing cells are unavailable, not zero.
 `isolated_atom_energies.csv` records calculator, atomic number, symbol, energy
 in eV and status/error. Error rows must not be interpreted as energies.
-Use `ip-orch --check-elements MODEL` to inspect current reference coverage.
+Use `ip-orch --check-elements MODEL` to inspect numerical availability, not
+scientific validation. Loading bundled precomputed references emits a Python
+`UserWarning` about incomplete provenance. These values remain available for
+backward compatibility; prefer computed references with the exact backend for
+research.
 
 The regeneration script is `ip_orch/scripts/isolated_atom_energies.py`. It
 places one atom at the center of a 20 Å cubic nonperiodic cell and attempts

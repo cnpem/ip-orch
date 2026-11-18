@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 ### Audit corrections
+- Added verified zirconia preprint evidence to the research impact statement and public documentation.
+- Corrected the development-history summary using full main-branch history and release metadata.
+- Warn when loading legacy precomputed references and show the provenance warning in element coverage output.
+- Added regression tests for legacy-reference warnings and numerical coverage.
 - Validated a clean Conda installation and simultaneous CUDA MACE/ORB execution.
 - Selected float32-highest for ORB after observing a GPU force-check discrepancy.
 - Added explicit benchmark validation and regenerated H/C/Si references with provenance.

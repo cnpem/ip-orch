@@ -1,11 +1,16 @@
 from __future__ import annotations
 
 import csv
+import warnings
 from importlib import resources
 
 from .model_factory import ModelFactory
 
 REFERENCE_ENERGIES_RESOURCE = "reference_energies.csv"
+LEGACY_REFERENCE_WARNING = (
+    "Bundled precomputed reference energies are legacy values with incomplete provenance. "
+    "Regenerate references with the actual backend before scientific use."
+)
 NON_COMPUTABLE_REFERENCE_FAMILIES = ("grace", "matris", "m3gnet")
 
 
@@ -48,6 +53,7 @@ def load_precomputed_reference_energies(model_name: str, elements: list[str]) ->
     if missing:
         joined = ", ".join(missing)
         raise ValueError(f"Missing precomputed reference energies for {model_name!r}: {joined}.")
+    warnings.warn(LEGACY_REFERENCE_WARNING, UserWarning, stacklevel=2)
     return values
 
 

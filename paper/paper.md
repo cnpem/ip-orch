@@ -132,25 +132,16 @@ same coefficient; constant composition-dependent offsets have zero derivatives.
 
 # Research impact statement
 
-The committed `examples/surfaces_benchmark.ipynb` records a completed comparison
-of bulk, slab and surface energies against DFT using seven MLIPs, dispatched by
-IP-Orch. Its saved outputs report surface-energy RMSE values of 0.3521 J/m²
-for MACE-MP, 0.09692 J/m² for MACE-MPA-0, and 0.1013 J/m² for ORB-v3.
-IP-Orch supplied environment selection and reused the same comparison logic
-across backends. These are recorded notebook outputs, not independently
-reproduced measurements. Extracted logs are provided in
-`examples/benchmark/notebook_evidence.json`. The notebook reports 20 surface
-and 20 DFT cache files; input datasets, full backend versions and DFT settings
-must be archived before its numerical claims can be independently audited.
-No publication enabled by IP-Orch or independent adoption is established by
-these artifacts. A smaller silicon example in `examples/benchmark` supplies
-portable input and structured output for integration validation; it does not
-replace the missing surface dataset.
+IP-Orch has been used in a systematic assessment of the cross-geometry transferability of universal machine learning interatomic potentials for zirconia [@zanineli2026crossgeometry]. In the zero-shot benchmark, IP-Orch orchestrated model loading, dataset evaluation, and metric calculation for 26 pretrained MLIPs across bulk, slab, particle, neck, and atomic wire configurations. This application demonstrates its utility in comparative studies involving heterogeneous MLIP architectures and software environments.
+
+The repository also provides a portable silicon integration benchmark using MACE and ORB in isolated environments, with structured outputs and validation procedures. This example verifies software functionality rather than reproducing the zirconia study or establishing model accuracy.
 
 # AI usage disclosure
 
 OpenAI Codex assisted with audit fixes, tests, documentation and revision of
-this manuscript. Changes were checked using Ruff, pytest and package builds;
+this manuscript. ChatGPT (GPT-6) assisted with the subsequent research-impact
+revision and reference-energy warning changes. Earlier changes were checked
+using Ruff, pytest and package builds;
 these automated checks do not constitute human scientific validation.
 [NEEDS EVIDENCE: authors must record the exact model/tool version, disclose any
 prior AI use, and describe their human review before submission.]
